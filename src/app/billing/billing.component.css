@@ -1,0 +1,14 @@
+.billing-Upgrade-button{
+    background-color:#3C61AD;
+    color: white;
+}
+.bold-letter{
+    font-weight: 600;
+}
+.no-bold-letter{
+    font-weight: 500;
+}
+.imgBilling{
+    width: 80px;
+    height: unset;
+}

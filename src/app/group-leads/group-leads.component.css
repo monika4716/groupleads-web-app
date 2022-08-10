@@ -1,0 +1,123 @@
+.billing-Upgrade-button{
+    background-color:#3C61AD;
+    color: white;
+}
+.dropdown>ul>li:hover{
+    background-color:rgba(60, 97, 173, 0.25);
+}
+
+.dropdown a:hover{ 
+    color:#000000;
+}
+
+.dropdown>ul>li>a{
+    padding: 2px 13px;
+    display: block;
+}
+.dropdown li {
+     padding: unset; 
+}
+.main .searchinput input{
+    background: #EEF9FB;
+    height: 44px;
+}
+ .main .searchinput input{
+    padding-left:32px; 
+}
+input.form-control::placeholder {
+    font-size: 15px !important;
+    color:#C4C4C4;
+}
+ .main .searchinput i{
+    position: absolute;
+    top: 14px;
+    left: 27px;
+    color:#C4C4C4;
+    font-size: 17px;
+} 
+.main .searchinput{
+    position: absolute;
+    top: 8px;
+    left: 383px;
+}
+
+.Notvalid_ans .fa-trash.text-danger{
+    color: #FFFFFF !important;
+}
+
+
+/* th:nth-child(10), td:nth-child(10) { */
+.custom-width-3{
+    width: 300px!important;
+    white-space: unset!important;
+    text-overflow: unset !important;
+    word-break: break-all;
+}
+
+th:nth-child(1),th:nth-child(6),th:nth-child(7),th:nth-child(8),th:nth-child(9),th:nth-child(10),th:nth-child(11) {
+    width: 300px!important;
+    white-space: unset!important;
+    text-overflow: unset !important;
+}
+
+th:nth-child(3),th:nth-child(4),th:nth-child(13),td:nth-child(3),td:nth-child(4),td:nth-child(13){
+    width: 240px!important;
+}
+@media (max-width: 2400px) and (min-width: 2000px) {
+    .searchinput {
+        left: 540px !important;
+    }
+}
+@media (max-width: 2000px) and (min-width: 1900px) {
+    .searchinput {
+        left: 510px !important;
+    }
+}
+@media (max-width: 1900px) and (min-width: 1773px) {
+    .searchinput {
+        left: 485px !important;
+    }
+}
+@media (max-width: 1773px) and (min-width: 1550px) {
+    .searchinput {
+        left: 458px !important;
+    }
+}
+@media (max-width: 1640px) and (min-width: 1540px) {
+    .searchinput {
+        left: 423px !important;
+    }
+}
+ @media (max-width: 1540px) and (min-width: 1400px) {
+    .searchinput {
+        left: 400px !important;
+    }
+}
+@media (max-width: 1400px) and (min-width: 1250px) {
+    .searchinput {
+        left: 350px !important;
+    }
+}
+@media (max-width: 1250px) and (min-width: 1050px) {
+    .searchinput {
+        left: 310px !important;
+    }
+}
+@media (max-width: 1050px) and (min-width: 768px) {
+    .searchinput {
+        left: 242px !important;
+    }
+}
+@media (max-width: 768px) and (min-width: 250px) {
+    .searchinput {
+        position: absolute;
+        top: 86px !important;
+        left: 0px !important;
+        max-width: 100% !important;
+    }
+}
+@media (max-width: 768px) and (min-width: 250px) {
+    .topMargin {
+        margin-top: 2rem !important;
+    }
+}

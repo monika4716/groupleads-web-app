@@ -1,0 +1,71 @@
+<app-header-after-login></app-header-after-login>
+
+<ngx-spinner bdOpacity=0.4 bdColor="rgba(51,51,51,0.42)" size="medium" color="#2457c7" type="ball-spin-fade"
+    [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+<div class="groupListWrap" *ngIf="Nogroup == false">
+    <div class="container dashboard mt-4 pt-2">
+        <div class="row">
+            <div class="col-md-6 p-0">
+                <h3>Group List</h3>
+            </div>
+            <div class="col-md-6 text-right filters">
+                <div class="dropdown">
+                    <button class="btn btn-primary" 
+                        type="button" data-toggle="dropdown">
+                        <img src="assets/images/list.png" class="mr-2" />
+                        <span class="caret" style="font-size: 15px;"> Filter by date</span>
+                    </button>
+                    <ul (click)="onChange($event,'')" class="dropdown-menu" style="cursor: pointer;">
+                        <li id="today"><a data_filter="today">Today</a></li>
+                        <li id="thisMonth"><a data_filter="this_month">This month</a></li>
+                        <li id="last30Days"><a data_filter="last_30_days">Last 30 Days</a></li>
+                        <li id="last90Days"><a  data_filter="last_90_days">Last 90 Days</a></li>
+                        <li id="thisYear"><a data_filter="this_year">This Year</a></li>
+                        <li id="allTime"><a data_filter="all_time">All Time</a></li>
+                    </ul>
+                </div>
+                <!-- <span *ngIf="!enableFilters" class="filtersLoader">
+                    <p-progressSpinner></p-progressSpinner>
+                </span> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mb-4 pb-4 mt-3">
+        <p-table [columns]="cols" styleClass="ui-table-cars table-responsive1" [paginator]="true" [rows]="10"
+            selectionMode="single" [value]="groupsData">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of cols" [pSortableColumn]="col.field" [ngSwitch]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-group let-rowData let-columns="columns">
+                <!-- [queryParams]="{group_id:rowData.group_id,fb_group_id:rowData.fb_group_id,filter_name:filterDropdown}" -->
+                <tr [pSelectableRow]="rowData" [pEditableRow]="rowData" *ngIf="rowData.group_id != 0">
+                    <td [routerLink]="['/groupLeads']"
+                        [queryParams]="{group_id:rowData.group_id,fb_group_id:rowData.fb_group_id}"
+                        style="cursor: pointer;color: #9B9898;">{{rowData.group_name}}</td>
+                    <td style="cursor: text;color: #9B9898;">{{rowData.count}}</td>
+                    <td style="cursor: text;color: #9B9898;">
+                        {{rowData.lastUpdate ? (rowData.lastUpdate | date: 'MMMM dd, yyyy'):"--"}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<div *ngIf="Nogroup" class="row mt-3 pt-5 mb-2">
+    <div class="col-12 text-center">
+        <img class="mr-2 no-groups-img" src="assets/images/groupEmpty.png" />
+    </div>
+    <div class="col-12 mt-2">
+        <p class="no-leads-bottom-text no-groups-text">No groups has been added. Please do so from the
+            extension</p>
+    </div>
+</div>

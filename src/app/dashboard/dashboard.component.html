@@ -1,0 +1,134 @@
+<app-header-after-login></app-header-after-login>
+<!-- <div class="col-sm-12 dashboard">
+    <div class="row">
+        <ngx-spinner bdOpacity=0.4 bdColor="rgba(51,51,51,0.42)" size="medium" color="#2457c7" type="ball-spin-fade"
+            [fullScreen]="true">
+            <p style="color: white"> Loading... </p>
+        </ngx-spinner>
+        <div class="col-sm-3 sidenav p-0">
+            <app-side-bar style="width: 100%;"></app-side-bar>
+        </div>
+        <div class="col-sm-9 main">
+            <div class="col-12 top pt-1 p-0">
+                
+            </div>
+            <div *ngIf="totalLeads" class="row mt-2 mb-2">
+                <div class="col-12 col-sm-12 col-md-6 box welcome-area p-2 pl-4 pr-4">
+                    <h4 class="mb-2">Hi <span style="text-transform: capitalize;">{{name}}</span>,</h4>
+                    <p class="m-0 text-left">No leads have been captured. Please, visit the extension/FB group to start adding leads and the details would show up here.</p>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div *ngIf="totalLeads == false" class="row mt-2 mb-2">
+                <div class="col-12 col-sm-12 col-md-6 box welcome-area p-2 pl-4 pr-4">
+                    <h4 class="mb-2">Congratulations <span style="text-transform: capitalize;">{{name}}</span>,</h4>
+                    <p class="m-0 text-left text-white">You've generated {{overAlltotalLeads}} total leads since you started using</p>
+                    <p class="m-0 text-left text-white">Group Leads on your Facebook groups.</p>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div *ngIf="totalLeads == false" class="col-12 col-sm-12 col-md-12 overview ng-star-inserted">
+                <h4>Account Overview</h4>
+            </div>
+            <div class="row pt-3 leads-chart-container" *ngIf="totalLeads == false">
+                <div class="col-md-6 col-6 col-sm-6 left_sec">
+                    <h4>Total Leads Captured in {{dateVariable}} = {{total}}</h4>
+                </div>
+                <div class="col-md-2 col-sm-3 d-sm-block d-md-block d-none"></div>
+                <div class="col-4 col-sm-1 col-md-2 text-right p-0 mt-2">
+                    <span>View more</span>
+                </div>
+                <div class="col-2 col-sm-2 col-md-2 right-sec view pl-0">
+                    <div class="dropdown">
+                        <button class="btn btn-primary" type="button" data-toggle="dropdown"><img
+                                src="assets/images/filter.png" />
+                            <span class="caret"></span></button>
+                        <ul (click)="onChange($event,'')" class="leads-filter dropdown-menu">
+                            <li id="today"><a>Today</a></li>
+                            <li id="thisMonth"><a>This month</a></li>
+                            <li id="last30Days"><a>Last 30 Days</a></li>
+                            <li id="last90Days"><a>Last 90 Days</a></li>
+                            <li id="thisYear"><a>This Year</a></li>
+                            <li id="allTime"><a>All Time</a></li>
+                           
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p-chart type="line" #chart [data]="data" width="75vw" height="52vh" [responsive]="true"></p-chart>
+                </div>
+            </div>
+            <div class="row pt-3" *ngIf="totalLeads">
+                <div class="col-12 overview">
+                    <h4>Account Overview</h4>
+                </div>
+                <div class="col-12 text-center">
+                    <img class="c-mb-5" src="assets/images/account-user.png" />
+                    <p class="no-leads-bottom-text">No leads was captured. Please visit the extension to add your leads.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="container dashboard mt-4 pt-2">
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Account Overview</h3>
+        </div>
+        
+        <div class="col-md-4 text-right filters" *ngIf="hasLeads && dataLoaded">
+            <div class="dropdown">
+                <button class="btn btn-primary pb-0 pt-0 pr-4 pl-4" type="button" data-toggle="dropdown">
+                    <span class="mr-3">Filter - {{filterDropdownLabel}}</span>
+                    <img src="assets/images/list.png" />
+                    <span class="caret"></span>
+                </button>
+                <ul (click)="onChange($event,'')" class="leads-filter dropdown-menu">
+                    <li id="today"><a data_filter="today">Today</a></li>
+                    <li id="thisMonth"><a data_filter="this_month">This month</a></li>
+                    <li id="last30Days"><a data_filter="last_30_days">Last 30 Days</a></li>
+                    <li id="last90Days"><a  data_filter="last_90_days">Last 90 Days</a></li>
+                    <li id="thisYear"><a data_filter="this_year">This Year</a></li>
+                    <li id="allTime" class="link"><a data_filter="all_time">All Time</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-12 text-center mb-4 pb-4 mt-4" *ngIf="!hasLeads && dataLoaded">
+            <img src="assets/images/fridge.png" class="mb-4" />
+            <h5>Hi,</h5>
+            <p>No leads have been captured. Please, visit the extension/FB group to start adding leads and the details
+                would show up here.</p>
+        </div>
+        <div class="row pt-3 leads-chart-container" *ngIf="hasLeads && dataLoaded">
+            <div class="col-md-6 col-6 col-sm-6 left_sec">
+                <!-- <h4>Total Leads Captured in {{dateVariable}} = {{total}}</h4> -->
+            </div>
+            <div class="col-md-2 col-sm-3 d-sm-block d-md-block d-none"></div>
+            <div class="col-4 col-sm-1 col-md-2 text-right p-0 mt-2">
+                <!-- <span>Filter</span> -->
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 right-sec view pl-0">
+                <!-- <div class="dropdown">
+                    <button class="btn btn-primary" type="button" data-toggle="dropdown">
+                        <span>Filter</span>
+                        <img src="assets/images/filter.png" />
+                        <span class="caret"></span></button>
+                    <ul (click)="onChange($event,'')" class="leads-filter dropdown-menu">
+                        <li id="today"><a>Today</a></li>
+                        <li id="thisMonth"><a>This month</a></li>
+                        <li id="last30Days"><a>Last 30 Days</a></li>
+                        <li id="last90Days"><a>Last 90 Days</a></li>
+                        <li id="thisYear"><a>This Year</a></li>
+                        <li id="allTime"><a>All Time</a></li>
+                    </ul>
+                </div> -->
+            </div>
+            <div class="col-12">
+                <p-chart type="line" #chart [data]="data" width="75vw" height="52vh" [responsive]="true"></p-chart>
+            </div>
+        </div>
+    </div>
+</div>

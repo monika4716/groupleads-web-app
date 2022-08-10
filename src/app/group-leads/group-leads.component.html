@@ -1,0 +1,146 @@
+<app-header-after-login></app-header-after-login>
+<ngx-spinner name="sp5" bdOpacity=0.4 bdColor="rgba(51,51,51,0.42)" size="medium" color="#2457c7" type="ball-spin-fade"
+    [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+<div class="groupListWrap">
+    <div class="container dashboard mt-4 pt-2">
+        <div class="row">
+            <div class="col-md-6 p-0">
+                <h3>Leads List</h3>
+            </div>
+            <div class="col-4 text-right">
+                <!--<button *ngIf="exportButton" type="button" label="CSV" class="billing-Upgrade-button btn"
+                    (click)="dt.exportCSV({selectionOnly:true})" style="float:right"><i class="fa fa-external-link text-white"
+                        aria-hidden="true"></i> Export</button>
+                <button *ngIf="exportButton == false" label="CSV-BySelection" type="button"
+                    class="billing-Upgrade-button btn" (click)="dt.exportCSV()" style="float:right"><i
+                        class="fa fa-external-link text-white" aria-hidden="true"></i> Export</button>-->
+                <button type="button" class="billing-Upgrade-button btn" (click)="exportCSV()" style="float:right"><i class="fa fa-external-link text-white" aria-hidden="true"></i> Export</button>
+            </div>
+            <div class="col-2 text-right right-sec view" style="padding: 0px;">
+                <div class="dropdown">
+                    <button style="background-color: white;border: 1px solid #ebdfdf; color:#333;" class="btn btn-primary"
+                        type="button" data-toggle="dropdown"><img src="assets/images/filter.png" />
+                        <span class="caret" style="font-size: 15px;"> Filter By Date</span></button>
+                    <ul (click)="onChange($event,'')" class="dropdown-menu" style="cursor: pointer;">
+                        <li id="today"><a>Today</a></li>
+                        <li id="thisMonth"><a>This month</a></li>
+                        <li id="last30Days"><a>Last 30 Days</a></li>
+                        <li id="last90Days"><a>Last 90 Days</a></li>
+                        <li id="thisYear"><a>This Year</a></li>
+                        <li id="allTime"><a>All Time</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12  p-2 group-leads-table-container"
+        style="margin-top: 18px;border-top: 1px solid rgba(196, 196, 196, 0.39);">
+        <p-table #dt [exportFilename]='csvName' [columns]="cols" styleClass="ui-table-cars" [value]="leads" [lazy]="true" (onLazyLoad)="lazyLoadLeads($event)" [paginator]="true" [rows]="rowsPerPage" [totalRecords]="totalRecords" [scrollable]="true" [resizableColumns]="true"  sortField="_id"  sortOrder="-1" [(first)]="first">
+            <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                    <col *ngFor="let col of cols">
+                </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="custom-width-3" *ngFor="let col of cols" [pSortableColumn]="col.field"
+                        [ngSwitch]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th>Delete</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-group let-rowData let-columns="columns" let-rowIndex="rowIndex">
+                <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+                    <td class="custom-width-3" style="color: #3C61AD;">{{rowData.profile_url}}</td>
+                    <td class="custom-width-3">{{rowData.full_name}}</td>
+                     <td class="custom-width-3">{{rowData.first_name}}</td>
+                    <td class="custom-width-3">{{rowData.last_name}}</td>
+                    <td class="custom-width-3">{{rowData.joined_date}}</td>
+                    <td class="custom-width-3">{{rowData.ques_one}}</td>
+                    <td class="custom-width-3">{{rowData.ans_one}}</td>
+                    <td class="custom-width-3">{{rowData.ques_two}}</td>
+                    <td class="custom-width-3">{{rowData.ans_two}}</td>
+                    <td class="custom-width-3">{{rowData.ques_three}}</td>
+                    <td class="custom-width-3">{{rowData.ans_three}}</td>
+                    <td class="custom-width-3">{{rowData.created_at | date: 'dd MMMM yyyy'}}</td>
+                    <td class="custom-width-3">
+                        <a class="btn btn-xs" style="cursor: pointer;"><i (click)="deleteLeads(rowData._id,rowIndex)"
+                                class="fa fa-trash text-danger" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="columns.length" class="text-center">
+                        You need to generate leads via the extension before data can be added here
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <!-- <p-table #tt [exportFilename]='csvName' id="group-leads" #dt [columns]="cols" styleClass="ui-table-cars"
+            [paginator]="true" [rows]="5" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+            (onPage)="paginate($event)" [first]="first" selectionMode="multiple" [value]="leads" [scrollable]="true"
+            [resizableColumns]="true">
+            <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                    <col *ngFor="let col of cols">
+                </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="custom-width-3" *ngFor="let col of cols" [pSortableColumn]="col.field"
+                        [ngSwitch]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th>Delete</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-group let-rowData let-columns="columns" let-rowIndex="rowIndex">
+                <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+                    <td class="custom-width-3" style="color: #3C61AD;">{{rowData.profile_url}}</td>
+                    <td class="custom-width-3">{{rowData.full_name}}</td>
+                    <td class="custom-width-3">{{rowData.first_name}}</td>
+                    <td class="custom-width-3">{{rowData.last_name}}</td>
+                    <td class="custom-width-3">{{rowData.joined_date}}</td>
+                    <td class="custom-width-3">{{rowData.ques_one}}</td>
+                    <td class="custom-width-3">{{rowData.ans_one}}</td>
+                    <td class="custom-width-3">{{rowData.ques_two}}</td>
+                    <td class="custom-width-3">{{rowData.ans_two}}</td>
+                    <td class="custom-width-3">{{rowData.ques_three}}</td>
+                    <td class="custom-width-3">{{rowData.ans_three}}</td>
+                    <td class="custom-width-3">{{rowData.created_at | date: 'dd MMMM yyyy'}}</td>
+                    <td class="custom-width-3">
+                        <a class="btn btn-xs" style="cursor: pointer;"><i (click)="deleteLeads(rowData.id,rowIndex)"
+                                class="fa fa-trash text-danger" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="columns.length" class="text-center">
+                        You need to generate leads via the extension before data can be added here
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table> -->
+    </div>
+</div>
+
+<!-- <div *ngIf="Nogroup" class="row mt-3 pt-5 mb-2">
+    <div class="col-12 text-center">
+        <img class="mr-2 no-groups-img" src="assets/images/groupEmpty.png" />
+    </div>
+    <div class="col-12 mt-2">
+        <p class="no-leads-bottom-text no-groups-text">No groups has been added. Please do so from the
+            extension</p>
+    </div>
+</div> -->

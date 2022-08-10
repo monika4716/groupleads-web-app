@@ -1,0 +1,14 @@
+<div class="dropdown">
+    <button class="btn btn-primary" type="button" data-toggle="dropdown"><img
+            src="assets/images/filter.png" />
+        <span class="caret"></span></button>
+    <ul (click)="onChange($event,'')" class="dropdown-menu" style="cursor: pointer;">
+        <li id="today"><a>Today</a></li>
+        <li id="thisMonth"><a>This month</a></li>
+        <li id="last30Days"><a>Last 30 Days</a></li>
+        <li id="last90Days"><a>Last 90 Days</a></li>
+        <li id="thisYear"><a>This Year</a></li>
+        <li id="allTime"><a>All Time</a></li>
+        <li id="currentPeriod"><a>Current Period</a></li>
+    </ul>
+</div>

@@ -1,0 +1,136 @@
+<!-- <div class="row">
+    <ngx-spinner bdOpacity=0.4 bdColor="rgba(51,51,51,0.42)" size="medium" color="#2457c7" type="ball-spin-fade"
+        [fullScreen]="true">
+        <p style="color: white"> Loading... </p>
+    </ngx-spinner>
+    <div class="col-md-4 col-sm-6 col-6 pt-1">
+        <div *ngIf="billinURl == false" class="advanceStyleSelectBox input-group mb-3 select_group groupleads-select">
+            
+            <select (change)="onChange($event,'')" [(ngModel)]="groupDropdown" class="form-control" id="sel1">
+                <option *ngFor="let group of groups"  value="{{group.group_id}}">{{group.group_name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-8 col-sm-6 col-6 text-right right">
+        <div class="row">
+            <div class="col-md-8 col-8 col-sm-6 text-right p-0">
+                <div class="dropdown">
+                    <button class="btn btn-primary pb-0" type="button" data-toggle="dropdown">
+                        <img class="user_profile mr-2" src="assets/images/blank.jpeg" />
+                        <span class="caret"></span>
+                    </button>
+                    <ul (click)="onLiChange($event)" class="dropdown-menu">
+                        <li id="billing">
+                            <a [routerLink]="['/billing']">
+                               
+                                <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                                Billing
+                            </a>
+                        </li>
+                        <li id="helpAndDoc">
+                            <a href="https://docs.groupleads.net/" target="_blank">
+                                
+                                <i class="fa fa-circle-o" style="font-size: 18px;" aria-hidden="true"></i>
+                                Help & Doc
+                            </a>
+                        </li>
+                        <li id="logout">
+                            <a [routerLink]="" (click)="logout()">
+                                
+                                <i class="fa fa-sign-out" style="font-size: 18px;" aria-hidden="true"></i>
+                                Log out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 col-4 col-sm-6 pt-2 text-left p-0">
+                <h6 class="pt-2"><a class="user_name" [routerLink]="" style="text-transform: capitalize;">{{name}}</a>
+                </h6>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<nav class="navbar navbar-expand-md bg-white navbar-dark header">
+    <div class="container">
+        <a class="navbar-brand" href="#" routerLink="/dashboard"><img src="assets/images/logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <i class="fa fa-align-justify"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav nav-sec">
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" routerLink="/dashboard"
+                        routerLinkActive="active">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" routerLink="/groupList"
+                        routerLinkActive="active">Group list</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" routerLink="/profile"
+                        routerLinkActive="active">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://groupleads.net/affiliates" target="_blank">Become an affiliate</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="https://docs.groupleads.net/" target="_blank">HELP<img src="assets/images/help.png" width="25"
+                            class="notification-icon ml-2"></a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0)"><img src="assets/images/bell.png" width="35"
+                            class="notification-icon"></a></li>
+                <li class="nav-item profile">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" class="nav-link dropdown-toggle"
+                            data-toggle="dropdown">
+                            <img src="assets/images/default.jpg" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" routerLink="/billing"><img src="assets/images/billing.png"
+                                    class="mr-3" />Billing</a>
+                            <a class="dropdown-item" href="https://docs.groupleads.net/" target="_blank"><img src="assets/images/help.png" class="mr-3" />Help &
+                                Doc</a>
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="logout()"><img src="assets/images/logout.png"
+                                    class="mr-3 logout" />Log Out</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<ngx-spinner bdOpacity=0.4 bdColor="rgba(51,51,51,0.42)" size="medium" color="#2457c7" type="ball-spin-fade"
+    [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<div class="row leads pt-4 pb-2">
+    <div class="container pt-4 pb-4">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <p-dropdown styleClass="groups_dropdown" [(ngModel)]="selectedGroup" [options]="group_listing"
+                        optionLabel="group_name" optionValue="group_id" (onChange)="onChange($event,'')"></p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-7 text-right right_sec">
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-7">
+                        <div class="count-leads group text-center" *ngIf="selectedGroup.group_id != '0'">
+                            <h5 title="{{selectedGroup.count}}">{{selectedGroup.count | counterdisplayformat}}</h5>
+                            <h6>Group Leads</h6>
+                        </div>
+                        <div class="count-leads total text-center">
+                            <h5 title="{{totalLeadsTitle}}">{{totalLeads | counterdisplayformat}}</h5>
+                            <h6>Total Leads</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
